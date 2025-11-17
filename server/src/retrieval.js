@@ -2,6 +2,7 @@
 
 const { build_tfidf, vectorize, cosine_sim } = require('./tfidf');
 const {loadJSON}= require('./util');
+const OpenAI= require("openai");
 
 // load datasets from /datasets
 const products= loadJSON('products.json');
@@ -82,6 +83,77 @@ function augment_product(product, user_query){
     };
 }
 
+// ---------- LLM-based augmentation ---------
+// Toggle: use LLM only if both env vars are set
+const useLLM= process.env.USE_LLM_RAG === "true" && !!process.env.OPENAI_API_KEY; // !! converts value to a boolean (becomes false if the key is empty) 
+
+let openai=null;
+if (useLLM){
+    openai= new OpenAI({
+        apiKey: process.env.OPENAI_API_KEY, //openai becomes a live client which can be used anywhere in the code
+    });
+}
+
+// Uses OpenAI to generate a short explanation on why that product is recommended
+async function augment_product_LLM(product, user_query) {
+    // fallback to augment_product if openai client is not set
+    if(!openai){
+        return augment_product(product, user_query);
+    }
+    try{
+        const baseText= [
+        product.name,
+        product.description,
+        Array.isArray(product.effects)? product.effects.join(' '):'',
+        Array.isArray(product.ingredients)? product.ingredients.join(' '):'',  
+    ].join(' ');
+
+    // reuse existing retrieve() to get relevant chunks
+    const hits= retrieve(`${baseText} ${user_query|| ""}`, 4);
+
+    // use line separated text instead of bullets for LLM
+    const context_text= hits.filter((h)=>h.score>0)
+        .map(h=>
+            `[${h.chunk.type.toUpperCase()}] ${h.chunk.text} (score: ${h.score.toFixed(3)})`
+        ).join("\n");
+
+    const prompt= `You are an assistant helping a user understand why a herbal/wellness product was recommended.
+        User query:
+        ${user_query || "(no explicit query)"}
+
+        Product:
+        Name: ${product.name}
+        Type: ${product.type}
+        Description: ${product.description}
+        Effects: ${Array.isArray(product.effects) ? product.effects.join(", ") : ""}
+        Ingredients: ${Array.isArray(product.ingredients) ? product.ingredients.join(", ") : ""}
+
+        Retrieved context (from product & ingredient knowledge base):
+        ${context_text || "(no extra context)"}
+
+        TASK:
+        In 2–3 concise sentences, explain why this product is a good fit for the user, referencing specific effects or ingredients when possible. Avoid marketing fluff; be factual and grounded in the context above.`;
+    
+    const response=await openai.responses.create({
+        model: "gpt-4o-mini",
+        input: prompt,
+    });
+
+    const text= response.output_text||"";
+    // const text = response.output?.[0]?.content?.[0]?.text?.value || "";
+
+    return{
+        productId: product.id,
+        context: hits.map(h=>h.chunk.text),
+        rationale: text|| "AI explanation not available; showing base details",
+    };
+    } catch(err){
+        console.error("augment_product_LLM error:", err);
+        // fallback to offline explanantion, but tag it so that the UI can tell that the LLM failed and we are using offline mode
+        return augment_product(product, user_query);
+    }
+}
+
 module.exports={
-    products, ingredients, retrieve, augment_product,
+    products, ingredients, retrieve, augment_product, augment_product_LLM,
 };

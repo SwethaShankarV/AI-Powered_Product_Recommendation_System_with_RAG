@@ -208,3 +208,5 @@ This gives the user a transparent explanation of why a product was surfaced, wit
 - Retrieval is purely TF–IDF; no dense embeddings or semantic search yet.  
 - There is no personalization history (e.g., per-user behavior, clicks, or purchases).  
 - RAG “generation” is template-based summarization of retrieved chunks, not free-form LLM output.  
+
+This prototype is based on a take-home assignment created by BakedBot.ai, which included the initial idea, mock datasets, and problem requirements. All implementation and extensions are my own.

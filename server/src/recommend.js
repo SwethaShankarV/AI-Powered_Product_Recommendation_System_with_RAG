@@ -1,10 +1,13 @@
 // server-> src-> recommend.js
 
-const { augment_product } = require("./retrieval");
+const { augment_product, augment_product_LLM } = require("./retrieval");
 const { loadJSON, normalize } = require("./util");
 
 const products= loadJSON('products.json');
 const sales= loadJSON('sales.json');
+
+// use LLM based explanations if env says so
+const useLLM= process.env.USE_LLM_RAG=="true";
 
 // Computes popularity score from sales (sum units_sold over the month)
 // apply log10 to avoid big numbers from dominating too much
@@ -70,13 +73,59 @@ function preference_score(prefs, product){
 }
 
 // Ranks array of products with score & augmentation (RAG context)
-function recommend(prefs, limit=5){
-    // .map() becuase a new array is created (.forEach() when existing array is editted)
+// function recommend(prefs, limit=5){
+//     // .map() becuase a new array is created (.forEach() when existing array is editted)
+//     const scored= products.map(p=>{ // products from products.json dataset
+//         const match_score= preference_score(prefs, p);
+//         const popularity_score= popularity_score_fn(p.id);
+
+//         // Blend: match score and populairty (more weightage to match)
+//         const final_score= 0.8* match_score+ 0.2*popularity_score;
+
+//         return {
+//             product: p,
+//             match_score,
+//             popularity_score,
+//             score: final_score,
+//         };
+//     });
+
+//     scored.sort((a,b)=> b.score-a.score); // sort high to low
+
+//     // to make sure clean_limit is always a valid number
+//     // Number("abc" || 5)||5= Number("abc")||5= NaN||5= 5 or Number("10"||5)||5= Number("10")||5= 10||5=10
+//     const clean_limit= typeof limit=='number'? limit: Number(limit||5)||5;
+    
+//     // each item in scored looks like:
+//     // {
+//     // product: { /* original product fields from products.json */ },
+//     // match_score: 1.4,
+//     // popularity_score: 0.9,
+//     // score: 1.22,
+//     // }
+
+//     // take top N and attach augmentation
+//     const top= scored.slice(0, clean_limit).map((item)=>{
+//         return {
+//             ...item.product, // all original fields from product gets added here
+//             score: item.score,
+//             match_score: item.match_score,
+//             popularity_score: item.popularity_score,
+//             augmentation: augment_product(item.product, prefs.text||''),
+//         };
+//     });
+
+//     return top;
+// }
+
+async function recommend(prefs, limit=5) {
+    const clean_limit= typeof limit=='number'? limit: Number(limit||5)||5;
+
     const scored= products.map(p=>{ // products from products.json dataset
         const match_score= preference_score(prefs, p);
         const popularity_score= popularity_score_fn(p.id);
 
-        // Blend: match score and populairty (more weightage to match)
+        // Blend: match score and populairty score (more weightage to match)
         const final_score= 0.8* match_score+ 0.2*popularity_score;
 
         return {
@@ -86,33 +135,25 @@ function recommend(prefs, limit=5){
             score: final_score,
         };
     });
+    scored.sort((a, b) => b.score - a.score);
+    const top = scored.slice(0, clean_limit);
 
-    scored.sort((a,b)=> b.score-a.score); // sort high to low
+    //Attach augmentation (to each top product) in parallel
+    const augmented= await Promise.all( // Promise.all(...) runs multiple async operations at the same time and waits for all of them to finish
+        top.map(async (item)=>{ // await makes us wait until all augmentations are done, then returns an array of results
+            const augmentation= useLLM? await augment_product_LLM(item.product, prefs.text||""):
+             augment_product(item.product, prefs.text||"");
 
-    // to make sure clean_limit is always a valid number
-    // Number("abc" || 5)||5= Number("abc")||5= NaN||5= 5 or Number("10"||5)||5= Number("10")||5= 10||5=10
-    const clean_limit= typeof limit=='number'? limit: Number(limit||5)||5;
-    
-    // each item in scored looks like:
-    // {
-    // product: { /* original product fields from products.json */ },
-    // match_score: 1.4,
-    // popularity_score: 0.9,
-    // score: 1.22,
-    // }
-
-    // take top N and attach augmentation
-    const top= scored.slice(0, clean_limit).map((item)=>{
-        return {
+             return {
             ...item.product, // all original fields from product gets added here
             score: item.score,
             match_score: item.match_score,
             popularity_score: item.popularity_score,
-            augmentation: augment_product(item.product, prefs.text||''),
+            augmentation,
         };
-    });
-
-    return top;
+        })
+    );
+    return augmented
 }
 
 // helper fn for GET /api/products

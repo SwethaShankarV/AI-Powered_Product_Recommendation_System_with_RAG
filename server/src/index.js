@@ -26,7 +26,30 @@ app.get('/api/products', (req, res)=>{
 });
 
 // Recommendation endpoint
-app.post('/api/recommendations', (req, res)=>{
+// app.post('/api/recommendations', (req, res)=>{
+//     try{
+//         const body= req.body || {};
+//         const prefs={
+//             text: body.text|| '',
+//             effects: Array.isArray(body.effects)? body.effects: [],
+//             ingredients: Array.isArray(body.ingredients)? body.ingredients: [],
+//         };
+//         const limit= typeof body.limit=='number'? body.limit: Number(body.limit||5)||5;
+//         const items= recommend(prefs, limit);
+
+//         res.json({
+//             preferences: prefs,
+//             count: items.length,
+//             recommendations: items
+//         });
+
+//     } catch (err){
+//         console.error('Error in /api/recommendations:', err);
+//         res.status(500).json({error: 'Fialed to generate recommendations'});
+//     }
+// });
+
+app.post('/api/recommendations', async(req, res)=>{
     try{
         const body= req.body || {};
         const prefs={
@@ -35,17 +58,17 @@ app.post('/api/recommendations', (req, res)=>{
             ingredients: Array.isArray(body.ingredients)? body.ingredients: [],
         };
         const limit= typeof body.limit=='number'? body.limit: Number(body.limit||5)||5;
-        const items= recommend(prefs, limit);
+        const items= await recommend(prefs, limit);
 
         res.json({
             preferences: prefs,
             count: items.length,
-            recommendations: items
+            recommendations: items,
+            mode: process.env.USE_LLM_RAG==="true"?"llm":"offline",
         });
-
-    } catch (err){
-        console.error('Error in /api/recommendations:', err);
-        res.status(500).json({error: 'Fialed to generate recommendations'});
+    } catch(err){
+        console.error("Error in /api/recommendations:", err);
+        res.status(500).json({error:"Failed to generate recommendations"});
     }
 });
 
