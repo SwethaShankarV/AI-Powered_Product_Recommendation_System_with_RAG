@@ -1,0 +1,158 @@
+[
+  {
+    "id": 1,
+    "name": "Relaxation Tea",
+    "type": "beverage",
+    "description": "A soothing herbal tea blend designed for relaxation and stress relief.",
+    "effects": ["relaxation","stress relief"],
+    "ingredients": ["Chamomile","Lavender","Lemon Balm"],
+    "price": 12.99,
+    "sales_data": {
+      "units_sold": 120,
+      "last_month_revenue": 1558.8
+    }
+  },
+  {
+    "id": 2,
+    "name": "Energy Brew",
+    "type": "beverage",
+    "description": "A revitalizing herbal tea blend formulated to boost energy and enhance focus.",
+    "effects": ["energy boost", "enhanced focus"],
+    "ingredients": ["Ginseng","Peppermint","Green Tea"],
+    "price": 11.99,
+    "sales_data": {
+      "units_sold": 150,
+      "last_month_revenue": 1798.5
+    }
+  },
+  {
+    "id": 3,
+    "name": "Immunity Shot",
+    "type": "supplement",
+    "description": "A concentrated drink fortified with herbs that help strengthen immune defenses.",
+    "effects": ["immunity"],
+    "ingredients": ["Turmeric", "Ginger", "Echinacea", "Lemon Balm"],
+    "price": 7.99,
+    "sales_data": {"units_sold": 180, "last_month_revenue": 1438.2}
+  },
+  {
+    "id": 4,
+    "name": "Joint Flex Capsules",
+    "type": "supplement",
+    "description": "Daily capsules to support joint mobility and reduce inflammation.",
+    "effects": ["joint relief"],
+    "ingredients": ["Turmeric", "Ginger"],
+    "price": 24.99,
+    "sales_data": {"units_sold": 95, "last_month_revenue": 2374.05}
+  },
+  {
+    "id": 5,
+    "name": "Sleep Serenity Oil",
+    "type": "aroma",
+    "description": "A soothing aromatic oil blend to promote deep relaxation and sound sleep.",
+    "effects": ["relaxation", "improved sleep"],
+    "ingredients": ["Lavender", "Valerian", "Sandalwood"],
+    "price": 19.99,
+    "sales_data": {"units_sold": 80, "last_month_revenue": 1599.2}
+  },
+  {
+    "id": 6,
+    "name": "Sleep Gummies",
+    "type": "edible",
+    "description": "Melatonin micro-dose with chamomile extract for improved sleep quality.",
+    "effects": ["improved sleep", "relaxation"],
+    "ingredients": ["Melatonin", "Chamomile"],
+    "price": 16.0,
+    "sales_data": {"units_sold": 180, "last_month_revenue": 2880}
+  },
+  {
+    "id": 7,
+    "name": "Focus Brew",
+    "type": "beverage",
+    "description": "Lightly caffeinated yerba mate with L-theanine for calm focus.",
+    "effects": ["enhanced focus", "energy boost"],
+    "ingredients": ["Yerba Mate", "L-theanine"],
+    "price": 14.5,
+    "sales_data": {"units_sold": 220, "last_month_revenue": 3190}
+  },
+  {
+  "id": 8,
+  "name": "Calm Mind Tonic",
+  "type": "beverage",
+  "description": "A gentle herbal infusion crafted to ease mental tension and promote calm clarity.",
+  "effects": ["relaxation","stress relief"],
+  "ingredients": ["Lemon Balm", "Ashwagandha", "Lavender"],
+  "price": 13.49,
+  "sales_data": {"units_sold": 140, "last_month_revenue": 1888.6}
+  },
+  {
+    "id": 9,
+    "name": "Vitality Capsules",
+    "type": "supplement",
+    "description": "Daily herbal capsules that support natural energy and overall vitality.",
+    "effects": ["energy boost"],
+    "ingredients": ["Ginseng", "Rhodiola", "Green Tea Extract"],
+    "price": 22.99,
+    "sales_data": {"units_sold": 130, "last_month_revenue": 2988.7}
+  },
+  {
+    "id": 10,
+    "name": "Immune Guard Brew",
+    "type": "beverage",
+    "description": "Warm spiced herbal tea blend formulated to support immune robustness.",
+    "effects": ["immunity"],
+    "ingredients": ["Ginger", "Cinnamon", "Elderberry"],
+    "price": 12.49,
+    "sales_data": {"units_sold": 165, "last_month_revenue": 2060.85}
+  },
+  {
+    "id": 11,
+    "name": "Deep Sleep Mist",
+    "type": "aroma",
+    "description": "A calming aromatic spray featuring sleep-supportive botanicals for bedtime relaxation.",
+    "effects": ["improved sleep", "relaxation"],
+    "ingredients": ["Lavender", "Chamomile", "Sandalwood"],
+    "price": 17.99,
+    "sales_data": {"units_sold": 90, "last_month_revenue": 1619.1}
+  },
+  {
+    "id": 12,
+    "name": "Digestive Harmony Tea",
+    "type": "beverage",
+    "description": "A soothing blend crafted to support gentle digestion and reduce bloating discomfort.",
+    "effects": ["digestive support"],
+    "ingredients": ["Peppermint", "Ginger", "Fennel"],
+    "price": 10.99,
+    "sales_data": {"units_sold": 175, "last_month_revenue": 1923.25}
+  },
+  {
+    "id": 13,
+    "name": "Mood Balance Gummies",
+    "type": "edible",
+    "description": "Fruit-flavored gummies made with calming botanicals to support balanced mood and relaxation.",
+    "effects": ["relaxation", "mood balance"],
+    "ingredients": ["L-theanine", "Lemon Balm", "Chamomile"],
+    "price": 15.5,
+    "sales_data": {"units_sold": 160, "last_month_revenue": 2480}
+  },
+  {
+    "id": 14,
+    "name": "Joint Comfort Cream",
+    "type": "topical",
+    "description": "A herbal warming cream designed to ease minor joint stiffness and support mobility.",
+    "effects": ["joint relief"],
+    "ingredients": ["Arnica", "Turmeric", "Ginger"],
+    "price": 21.99,
+    "sales_data": {"units_sold": 110, "last_month_revenue": 2418.9}
+  },
+  {
+    "id": 15,
+    "name": "Focus Chews",
+    "type": "edible",
+    "description": "Natural fruit chews crafted to promote sustained focus without the jitters.",
+    "effects": ["enhanced focus"],
+    "ingredients": ["Ginkgo Biloba", "Green Tea Extract", "L-theanine"],
+    "price": 12.75,
+    "sales_data": {"units_sold": 200, "last_month_revenue": 2550}
+  }
+]

@@ -1,0 +1,112 @@
+[
+  {
+    "name": "Chamomile",
+    "properties": "A mild, floral herb often used in calming blends.",
+    "common_effects": ["relaxation", "improved sleep"]
+  },
+  {
+    "name": "Lavender",
+    "properties": "Aromatic floral herb commonly used for soothing blends.",
+    "common_effects": ["relaxation", "improved sleep", "stress relief"]
+  },
+  {
+    "name": "Lemon Balm",
+    "properties": "Citrus-mint herb used for calming and clarity blends.",
+    "common_effects": ["relaxation", "stress relief", "mood balance"]
+  },
+  {
+    "name": "Ginseng",
+    "properties": "Energizing adaptogenic root.",
+    "common_effects": ["energy boost"]
+  },
+  {
+    "name": "Peppermint",
+    "properties": "Cooling mint leaf used for digestive and refreshing teas.",
+    "common_effects": ["energy boost", "digestive support"]
+  },
+  {
+    "name": "Green Tea",
+    "properties": "Light caffeinated tea leaf.",
+    "common_effects": ["energy boost", "enhanced focus"]
+  },
+  {
+    "name": "Turmeric",
+    "properties": "Warm golden spice frequently paired with ginger.",
+    "common_effects": ["immunity", "joint relief"]
+  },
+  {
+    "name": "Ginger",
+    "properties": "Spicy root used in wellness and digestive blends.",
+    "common_effects": ["immunity", "joint relief", "digestive support"]
+  },
+  {
+    "name": "Echinacea",
+    "properties": "Floral herb commonly used in seasonal immune blends.",
+    "common_effects": ["immunity"]
+  },
+  {
+    "name": "Valerian",
+    "properties": "Earthy root traditionally used for restfulness.",
+    "common_effects": ["improved sleep"]
+  },
+  {
+    "name": "Sandalwood",
+    "properties": "Woody aromatic material used in calming oils and sprays.",
+    "common_effects": ["relaxation", "improved sleep"]
+  },
+  {
+    "name": "Melatonin",
+    "properties": "Sleep-support molecule used in gummies and oils.",
+    "common_effects": ["improved sleep", "relaxation"]
+  },
+  {
+    "name": "Yerba Mate",
+    "properties": "Naturally caffeinated herb used for balanced energy.",
+    "common_effects": ["enhanced focus", "energy boost"]
+  },
+  {
+    "name": "L-theanine",
+    "properties": "Amino acid promoting calm and focus.",
+    "common_effects": ["enhanced focus", "relaxation", "mood balance"]
+  },
+  {
+    "name": "Ashwagandha",
+    "properties": "Adaptogenic root traditionally used for calm and resiliency.",
+    "common_effects": ["relaxation", "stress relief"]
+  },
+  {
+    "name": "Rhodiola",
+    "properties": "An adaptogenic root used for stamina.",
+    "common_effects": ["energy boost"]
+  },
+  {
+    "name": "Green Tea Extract",
+    "properties": "Concentrated green tea used in focus and energy supplements.",
+    "common_effects": ["energy boost", "enhanced focus"]
+  },
+  {
+    "name": "Cinnamon",
+    "properties": "Warm aromatic spice used in wellness teas.",
+    "common_effects": ["immunity"]
+  },
+  {
+    "name": "Elderberry",
+    "properties": "Dark berry extract commonly used for seasonal support.",
+    "common_effects": ["immunity"]
+  },
+  {
+    "name": "Fennel",
+    "properties": "Sweet, aromatic seed often used for digestive comfort.",
+    "common_effects": ["digestive support"]
+  },
+  {
+    "name": "Arnica",
+    "properties": "Herb used topically for joint and muscle comfort.",
+    "common_effects": ["joint relief"]
+  },
+  {
+    "name": "Ginkgo Biloba",
+    "properties": "Herbal extract often included in focus-oriented blends.",
+    "common_effects": ["enhanced focus"]
+  }
+]
