@@ -6,28 +6,30 @@ This prototype uses a simple, transparent **content-based recommendation** appro
 
 You can enter any combination of inputs — all fields are optional:
 
-Free-text preferences
+- Free-text preferences
 e.g., “something calming for sleep”, “energizing morning drink”
 
-Desired effects (comma-separated)
+- Desired effects (comma-separated)
 e.g., relaxation, improved sleep
 
-Preferred ingredients (comma-separated)
+- Preferred ingredients (comma-separated)
 e.g., chamomile, ginger
 
-Number of recommendations
+- Number of recommendations
 e.g., 5
 
 You can fill one field or all fields.
 
 ## API Input
 POST /api/recommendations accepts:
+<pre><code class="language-json">
 {
   "text": "I want something for relaxation and better sleep, maybe chamomile or lavender.",
   "effects": ["relaxation", "improved sleep"],
   "ingredients": ["Chamomile", "Lavender"],
   "limit": 5
 }
+</code></pre>
 
 # Scoring
 
