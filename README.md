@@ -115,9 +115,9 @@ Enter preferences and explore product recommendations.
 - Each product and ingredient becomes a text document.
 - TF-IDF vectors built over the full corpus.
 - Retrieval = cosine similarity between:
-    -- user query
-    -- product descriptions
-    -- ingredient properties
+    - user query
+    - product descriptions
+    - ingredient properties
 
 ## Step 2 — Score Each Product
 #### A. Preference / Match Score Components
@@ -277,9 +277,9 @@ We use a simple TF–IDF + cosine similarity retriever:
 2. Build TF–IDF vectors for each chunk (<code>build_tfidf(chunks)</code>).  
 3. For each recommended product:
    - Construct a query using:
-      -- the product’s name
-      -- its description/effects/ingredients
-      -- the user’s free-text input (<code>prefs.text</code>)
+      - the product’s name
+      - its description/effects/ingredients
+      - the user’s free-text input (<code>prefs.text</code>)
    - Convert the query into a TF–IDF vector (<code>vectorize(query)</code>). 
 4. Compute cosine similarity between the query vector and all KB vectors.
 5. Rank and return the top-k chunks.
@@ -340,9 +340,9 @@ If LLM mode is enabled but the OpenAI request fails due to:
 
 Then the backend:
 
-- **Gracefully falls back** to offline RAG  
-- **Still returns valid recommendations**  
-- **Keeps the frontend fully functional**  
+- Gracefully falls back to offline RAG  
+- Still returns valid recommendations 
+- Keeps the frontend fully functional 
 
 This ensures stability even when AI services are unavailable.
 
@@ -382,3 +382,4 @@ This prototype is intentionally lightweight, but several enhancements would sign
 - Designed to be transparent, simple, and easy to extend
 
 ---
+
