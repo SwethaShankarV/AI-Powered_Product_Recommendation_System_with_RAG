@@ -38,7 +38,7 @@ This system integrates classical information-retrieval techniques, heuristic ran
   export USE_LLM_RAG=true
 
 ## 1.2 Architecture Overview
-
+```
 root/
 │
 ├── server/
@@ -65,7 +65,7 @@ root/
     ├── products.json
     ├── ingredients.json
     └── sales.json
-
+```
 ---
 
 # 2. Running & Modes
